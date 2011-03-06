@@ -2,14 +2,20 @@
 App::import("Component","Bible.EsvBible");
 class BibleComponent extends Object {
     var $components = array("EsvBible");
-    var $impl = null;
+    var $default = "Esv";
+
     function initialize(&$controller, $settings=array()) {
-        $this->impl = $this->{$settings["translation"] . "Bible"};
-        $this->impl->set_key($settings["key"]);
+        foreach ($settings as $impl => $impl_settings) {
+            if (is_array($impl_settings)) {
+                $this->{$impl . "Bible"}->set_settings($impl_settings);
+            } else {
+                $this->default = $impl;
+            }
+        }
     }
 
-    function get_passage($passage) {
+    function get_passage($passage, $impl = null) {
         CakeLog::write(LOG_DEBUG, "getting passage: $passage");
-        return $this->impl->get_passage($passage);
+        return $this->{($impl == null ? $this->default : $impl) . "Bible"}->get_passage($passage);
     }
 }
