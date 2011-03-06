@@ -8,8 +8,8 @@ class BibleComponent extends Object {
         foreach ($settings as $impl => $impl_settings) {
             if (is_array($impl_settings)) {
                 $this->{$impl . "Bible"}->set_settings($impl_settings);
-            } else {
-                $this->default = $impl;
+            } else if ($impl == "default") {
+                $this->default = $impl_settings;
             }
         }
     }
