@@ -21,12 +21,14 @@ class EsvBibleComponent extends Object {
     function get_passage($passage) {
         $passage = urlencode($passage);
         $options = "include-passage-references=false&audio-format=flash";
-        $url = "http://www.esvapi.org/v2/rest/passageQuery?key=" .
+        $url = "http://www.esvapi.org/v2/rest/passageQuery?key=" . 
                 $this->get_key() . "&passage=$passage&$options";
-        CakeLog::write(LOG_DEBUG, "getting passage from: $url");
-        $data = fopen($url, "r") ;
 
-        $passage_str = "";
+        CakeLog::write(LOG_DEBUG, "getting passage from: $url");
+
+        $data = @fopen($url, "r") ;
+
+        $passage_str = null;
 
         if ($data) {
             while (!feof($data)) { 
@@ -35,7 +37,7 @@ class EsvBibleComponent extends Object {
             }
             fclose($data);
         } else {
-            die("fopen failed for url to webservice");
+            CakeLog::write("error", "fopen failed for url to webservice: $url");
         }
 
         return $passage_str;
