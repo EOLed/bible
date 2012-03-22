@@ -1,5 +1,5 @@
 <?php
-class EsvBibleComponent extends Object {
+class EsvBibleComponent extends Component {
     var $settings = array();
     var $key = null;
 

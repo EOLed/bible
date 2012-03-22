@@ -1,7 +1,7 @@
 <?php 
-App::import("Component","Bible.EsvBible");
-class BibleComponent extends Object {
-    var $components = array("EsvBible");
+App::uses("EvsBibleComponent","Bible.Controller/Component");
+class BibleComponent extends Component {
+    var $components = array("Bible.EsvBible");
     var $default = "Esv";
 
     function initialize(&$controller, $settings=array()) {
