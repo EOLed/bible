@@ -4,7 +4,7 @@ class BibleComponent extends Component {
     var $components = array("Bible.EsvBible");
     var $default = "Esv";
 
-    function initialize(&$controller, $settings=array()) {
+    function initialize(Controller $controller, $settings=array()) {
         foreach ($settings as $impl => $impl_settings) {
             if (is_array($impl_settings)) {
                 $this->{$impl . "Bible"}->set_settings($impl_settings);

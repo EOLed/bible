@@ -3,7 +3,7 @@ class EsvBibleComponent extends Component {
     var $settings = array();
     var $key = null;
 
-    function initialize(&$controller, $settings=array()) {
+    function initialize(Controller $controller, $settings=array()) {
     }
 
     function set_settings($settings) {
